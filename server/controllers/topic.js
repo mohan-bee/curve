@@ -59,7 +59,7 @@ const getOneTopic = async (req, res) => {
     });
 
     return res.status(200).json({
-      msg: "Topic got successfully",
+      msg: "Here is you problem !",
       randomProblem: selectedProblem,
     });
   } catch (error) {
