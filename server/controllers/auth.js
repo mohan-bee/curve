@@ -87,7 +87,12 @@ const blockUser = async (req,res) => {
 }
 const logout = async (req,res) => {
     try {
-        res.clearCookie("token")
+        res.clearCookie("token", {
+             maxAge: 7 * 24 * 60 * 60 * 1000,
+            httpOnly:  process.env.NODE_ENV != "developement",
+            sameSite: 'none',
+            secure: process.env.NODE_ENV != "developement",
+        })
         return res.status(200).json({msg: "User Logged out Successfully"})
     } catch (error) {
         return res.status(500).json({msg: "Internal Server Error", desc: error.message})
