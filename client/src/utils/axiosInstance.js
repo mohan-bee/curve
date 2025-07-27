@@ -1,3 +1,5 @@
 import axios from "axios";
 
-export const axiosInstance = axios.create({baseURL: "https://curve-9qnx.onrender.com/api", withCredentials: true})
+const baseURL = import.meta.env.MODE == "development" ? "http://localhost:8000/api" : "https://curve-9qnx.onrender.com/api"
+console.log(baseURL)
+export const axiosInstance = axios.create({baseURL, withCredentials: true})

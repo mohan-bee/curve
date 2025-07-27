@@ -10,8 +10,10 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "https://curve-nine.vercel.app"
+console.log(baseUrl)
 app.use(cors({
-    origin: "https://curve-nine.vercel.app",
+    origin: baseUrl,
     credentials: true
 }))
 

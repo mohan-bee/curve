@@ -41,12 +41,14 @@ const inputs = []
   try {
     setTestOutput([])
     for (const test of testcases) {
+      console.log(test)
       const args = test.input.trim().split(" ");
       const argValues = [];
 
       for (let i = 2; i < args.length; i += 4) {
         try {
-          const parsed = JSON.parse(args[i]);
+          const corrected = args[i].replace(/^'(.*)'$/, '"$1"');
+          const parsed = JSON.parse(corrected);
           argValues.push(parsed);
         } catch (e) {
           console.warn(`Invalid JSON at index ${i}:`, args[i]);
