@@ -87,7 +87,7 @@ const ProblemForm = ({isEdit}) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter problem name"
-              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500/50 placeholder-gray-500"
+              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-zinc-500 placeholder-gray-500"
             />
           </div>
 
@@ -100,7 +100,7 @@ const ProblemForm = ({isEdit}) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe the problem..."
-              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-orange-500/50 placeholder-gray-500"
+              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-zinc-500 placeholder-gray-500"
             />
           </div>
 
@@ -111,7 +111,7 @@ const ProblemForm = ({isEdit}) => {
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500/50"
+              className="w-full bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-zinc-500"
             >
               {(topics && topics.length === 0) && <option disabled>Loading topics...</option>}
               {topics &&  topics.map((t) => (
@@ -148,20 +148,20 @@ const ProblemForm = ({isEdit}) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 type="text"
-                className="flex-1 bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500/50 placeholder-gray-500"
+                className="flex-1 bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-zinc-500 placeholder-gray-500"
                 placeholder='Input'
               />
               <input
                 value={expected}
                 onChange={(e) => setExpected(e.target.value)}
                 type="text"
-                className="flex-1 bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500/50 placeholder-gray-500"
+                className="flex-1 bg-[#2a2a2e] text-white px-4 py-2 border border-[#3a3a3e] rounded-lg focus:outline-none focus:ring-1 focus:ring-zinc-500 placeholder-gray-500"
                 placeholder='Expected Output'
               />
               <button
                 type="button"
                 onClick={addTestCase}
-                className="bg-orange-500 hover:bg-orange-600 border border-orange-500 text-white px-4 py-2 rounded-lg transition duration-200"
+                className="bg-zinc-200 hover:bg-white cursor-pointer  text-black px-4 py-2 rounded-lg transition duration-200"
               >
                 Add
               </button>
@@ -171,7 +171,7 @@ const ProblemForm = ({isEdit}) => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            className="w-full bg-zinc-950 border border-zinc-700 text-sm hover:bg-zinc-900 hover:scale-105 cursor-pointer text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
             {!isEdit ? 'Submit Problem' : 'Edit Problem'}
           </button>

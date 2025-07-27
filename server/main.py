@@ -1,5 +1,9 @@
 def solution(A,B):
     # return your solution here ...
-    return A + B
+    def dfs():
 
-print(solution("abc","cab"))
+        return [-1, -2]
+
+    return dfs()
+
+print(solution([1,2,2,3,3,3,4,5],6))

@@ -64,7 +64,7 @@ const Curve = ({ user }) => {
     <div className="h-screen grid grid-cols-1 md:grid-cols-2 bg-black text-gray-800">
       {/* Left - Problem Description */}
       {solved && <Solved />}
-      <div className="border-r border-gray-300 overflow-auto p-6 bg-black">
+      <div className="border-r border-zinc-700 overflow-auto p-6 bg-black">
         <DescriptionBar
           visited={visited}
           name={randomProblem?.name}
@@ -88,7 +88,7 @@ const Curve = ({ user }) => {
             setPassed={setPassed}
           />
         </div>
-        <div className="h-1/3 overflow-auto bg-white p-4 border-t border-gray-200">
+        <div className="h-1/3 overflow-auto bg-zinc-800 p-4 border-t border-zinc-700">
           <TestCases
             loading={loading}
             passed={passed}

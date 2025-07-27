@@ -9,22 +9,22 @@ const TopicCard = ({isAdminPage,id,title, description, coverImg}) => {
   const {startTimer} = useGlobalStore()
 
   return (
-    <div className="w-80 bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+    <div className="w-80 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 transition rounded-2xl shadow-md overflow-hidden flex flex-col">
       {/* <img
         src={coverImg}
         alt="Topic"
         className="w-full h-48 object-cover"
       /> */}
-      <div className='bg-gradient-to-r flex items-center  justify-center from-orange-200 to-orange-50 h-50 w-full'>
-          <h1 className="text-2xl md:text-3xl font-black text-center text-black drop-shadow-xl">{title.toUpperCase()}</h1>
+      <div className='flex items-center  justify-center bg-gradient-to-r  from-emerald-500 to-emerald-900 h-50 w-full'>
+          <h1 className="text-2xl md:text-3xl font-black text-center text-black  drop-shadow-xl ">{title.toUpperCase()}</h1>
       </div>
       <div className="flex-1 p-4">
-        <h2 className="text-lg font-semibold mb-2">{title}</h2>
-        <p className="text-sm text-gray-600">{description}</p>
+        <h2 className="text-lg font-semibold mb-2 ">{title}</h2>
+        <p className="text-sm text-zinc-400">{description}</p>
       </div>
       <div className="p-4 pt-0">
         {!isAdminPage && <button 
-        className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+        className="w-full bg-zinc-950 border border-zinc-700 cursor-pointer hover:bg-zinc-900 hover:scale-105 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
         onClick={() => {
           navigate(`/curve/${id}`);
           startTimer()

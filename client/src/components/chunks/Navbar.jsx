@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className='flex py-5 items-center justify-around bg-white border-b border-b-slate-300'>
+    <div className='flex py-5 items-center justify-around bg-zinc-800 border-b border-b-zinc-700'>
       <div className='flex items-center gap-2'>
         <img src="/Logo.png" alt="Logo" className="w-13 mb-2" />
         <h1 className='text-4xl font-black'>CURVE</h1>

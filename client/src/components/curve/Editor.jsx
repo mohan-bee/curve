@@ -74,8 +74,8 @@ const allPass = () => {
   return (
     <div className='w-full h-full bg-[#1E1E1E] p-5'>
       {/* Editor Header  */}
-      <div className='flex items-center justify-between px-6 bg-gray-200 p-1 rounded-md border border-slate-300'>
-        <div className='bg-white px-2 py-1 rounded-md border text-sm border-slate-300'>
+      <div className='flex items-center justify-between px-6 bg-zinc-800 p-1 py-2 text-white rounded-md border border-zinc-700'>
+        <div className='bg-white px-2 py-1 rounded-md border text-black text-sm border-slate-300'>
           Python
         </div>
         <div className='flex gap-2'>
@@ -87,29 +87,29 @@ const allPass = () => {
             Run
         </button>
         <button 
-        className='flex cursor-pointer items-center gap-2 text-sm bg-yellow-200 border border-slate-300  text-black px-2 py-1 rounded-md'
+        className='flex cursor-pointer items-center gap-2 text-sm bg-yellow-200   text-black px-2 py-1 rounded-md'
         onClick={() =>{ getOneTopic(topicId)}}
         >
           <SkipForward size={15}/>
           Skip
         </button>
         <button 
-        className='flex cursor-pointer items-center gap-2 text-sm bg-gray-200 border border-slate-500  text-black px-2 py-1 rounded-md'
+        className='flex cursor-pointer items-center gap-2 text-sm bg-gray-200   text-black px-2 py-1 rounded-md'
         onClick={() =>{ resetCode()}}
         >
           <RotateCcw  size={15}/>
         </button>
         {user?.isAdmin && <button 
-        className='flex cursor-pointer items-center gap-2 text-sm bg-green-200 border border-slate-300  text-black px-2 py-1 rounded-md'
+        className='flex cursor-pointer items-center gap-2 text-sm bg-green-200   text-black px-2 py-1 rounded-md'
         onClick={() =>{ allPass()}}
         >
           <Skull size={15}/>
           Pass All
         </button>}
         </div>
-        <div className='flex items-center gap-2 text-sm'>
-          <Timer />
-          {Math.floor(timer / 60)}:{timer % 60}
+        <div className='flex w-20 items-center gap-2 text-sm'>
+          <Timer size={15}/>
+          {Math.floor(timer / 60)}:{(timer % 60).toString().length == 1 ? `0${(timer % 60)}` : timer % 60}
         </div>
       </div>
       {/* Editor */}

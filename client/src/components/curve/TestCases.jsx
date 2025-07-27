@@ -34,11 +34,11 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
   }, [testcases, testOutput]);
 
   return (
-    <div className="h-full w-full bg-white border border-gray-300 shadow-sm font-mono text-sm rounded-md flex overflow-hidden">
+    <div className="h-full w-full bg-zinc-900 border border-zinc-700 shadow-sm font-mono text-sm rounded-md flex overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-36 border-r border-gray-200 bg-gray-50">
-        <div className='w-full font-bold flex items-center justify-between px-5.5 bg-white border border-slate-300 py-2'>
-          {passed.filter(p => p == true)?.length}/{testcases?.length}
+      <div className="w-36 border-r border-zinc-700 bg-zinc-800 text-zinc-300">
+        <div className='w-full font-bold flex items-center justify-between px-5.5 bg-zinc-800 border border-zinc-700 py-2'>
+          {passed.filter(p => p == true)?.length} Out of {testcases?.length}
           {!loading ? <div
           className={`${passed.filter(p => p == true)?.length == testcases?.length ? 'bg-green-400': 'bg-red-400'} w-3 h-3 rounded-full`}
           >
@@ -51,10 +51,10 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
           <button
             key={tc._id}
             onClick={() => setSelected(index)}
-            className={`w-full flex items-center justify-around text-left px-4 py-2 border-b border-gray-200 hover:bg-gray-100 ${
+            className={`w-full flex items-center justify-around text-left px-4 py-2 border-b border-zinc-700 hover:bg-zinc-700  ${
               selected === index
-                ? 'bg-white font-semibold text-black'
-                : 'text-gray-600'
+                ? 'bg-zinc-700 text-zinc-300'
+                : 'bg-zinc-800 font-semibold text-zinc-300'
             }`}
           >
             <div>Test Case {index + 1}</div>
@@ -74,15 +74,15 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
       {/* Right Display Panel */}
       <div className="flex-1 p-4 overflow-auto">
         <div className="flex flex-col gap-5 rounded-md p-4 space-y-2">
-          <div className="bg-gray-100 p-3 rounded-md border border-slate-200">
+          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
             <span className="font-semibold">Input:</span>{' '}
             {testcases?.[selected]?.input || ''}
           </div>
-          <div className="bg-gray-100 p-3 rounded-md border border-slate-200">
+          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
             <span className="font-semibold">Expected:</span>{' '}
             {testcases?.[selected]?.expected || ''}
           </div>
-          <div className="bg-gray-100 p-3 rounded-md border border-slate-200">
+          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
             <span className="font-semibold">Output:</span>{' '}
             {testOutput?.[selected]?.data || ''}
           </div>
