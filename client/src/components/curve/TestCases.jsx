@@ -34,7 +34,7 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
   }, [testcases, testOutput]);
 
   return (
-    <div className="h-full w-full bg-zinc-900 border border-zinc-700 shadow-sm font-mono text-sm rounded-md flex overflow-hidden">
+    <div className="h-full w-ful font-sans bg-zinc-900 border border-zinc-700 shadow-sm text-sm rounded-md flex overflow-hidden">
       {/* Left Sidebar */}
       <div className="w-36 border-r border-zinc-700 bg-zinc-800 text-zinc-300">
         <div className='w-full font-bold flex items-center justify-between px-5.5 bg-zinc-800 border border-zinc-700 py-2'>

@@ -122,6 +122,7 @@ const allPass = () => {
           theme="vs-dark"
           options={{
             fontSize: 13,
+            fontFamily: 'Fira Code, Menlo, monospace',
             minimap: { enabled: false },
             wordWrap: 'on',
           }}
