@@ -38,15 +38,16 @@ jobs:
        run: docker pull mohnb33/curve-server:latest
 
      - name: Remove Existing Container
-       run: docker rm -f curve-server || true
+       run: docker rm -f curve-server-container || true
 
-     - name: Run the Container 
-       run: docker run -d -p 8080:8080 --name curve-server \
-            -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-            -e NODE_ENV=production \
-            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} \
-            -e PORT=8080 \
+     - name: Run the Container
+       run: |
+         docker run -d -p 8080:8080 --name curve-server-container \
+           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
+           -e NODE_ENV=production \
+           -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+           -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} \
+           -e PORT=8080 \
             mohnb33/curve-server:latest
 
 
