@@ -1,0 +1,52 @@
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - server
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup for QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup for Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Dockerhub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        run: docker build --platform linux/arm64 -t mohnb33/curve-server:latest ./server
+
+      - name: Push Docker Image to Dockerhub
+        run: docker push mohnb33/curve-server:latest
+      
+
+  deploy:
+    runs-on: ['self-hosted', 'linux', 'arm64']
+    needs: build
+
+    steps:
+     - name: Pull Docker Image
+       run: docker pull mohnb33/curve-server:latest
+
+     - name: Remove Existing Container
+       run: docker rm -f curve-server || true
+
+     - name: Run the Container 
+       run: docker run -d -p 8080:8080 --name curve-server mohnb33/curve-server:latest \
+            -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
+            -e NODE_ENV=production \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} \
+            -e PORT=8080
+
+
+
