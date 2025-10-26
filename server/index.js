@@ -5,12 +5,13 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const authMiddleware = require('./middlewares/auth.middleware')
 const run = require('./core/python')
-
+    
 const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "https://curve-nine.vercel.app"
+// const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "https://curve-nine.vercel.app"
+const baseUrl = "http://localhost:5173"
 console.log(baseUrl)
 app.use(cors({
     origin: baseUrl,
@@ -39,3 +40,4 @@ app.listen(process.env.PORT, () => {
     connectDB()
     console.log(`Server is Running at ${process.env.PORT}`)
 })
+ 
