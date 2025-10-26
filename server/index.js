@@ -41,8 +41,8 @@ const testCode = `print(\"Hello\")`;
     }
 })()
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, '0.0.0.0', () => {
     connectDB()
-    console.log(`Server is Running at ${process.env.PORT}`)
+    console.log(`Server is Running at 0.0.0.0:${process.env.PORT}`)
 })
  
