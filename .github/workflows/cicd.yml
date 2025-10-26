@@ -20,7 +20,7 @@ jobs:
       - name: Setup for Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to Dockerhub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker Image
         run: docker build --platform linux/arm64 -t mohnb33/curve-server:latest ./server
