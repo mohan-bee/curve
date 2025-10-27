@@ -42,4 +42,4 @@ jobs:
 
      - name: Run the Container 
 
-       run: docker run -d -p 8080:8080 --name curve-client-container -e PORT=8080 -e MONGODB_URI=${{ secrets.MONGODB_URI }} -e ENV='production' -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} mohnb33/curve-client:latest
+       run: docker run -d -p 5173:80 --name curve-client-container -e ENV='production' mohnb33/curve-client:latest
