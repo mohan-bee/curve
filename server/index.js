@@ -10,7 +10,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "http://16.170.168.114:5173"
+const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "http://13.50.15.169:5173"
 
 
 app.get('/env', (req, res) => {
