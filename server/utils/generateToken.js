@@ -11,7 +11,7 @@ const generateToken = async (res,user) =>{
               secure: false
        });
 
-
+       console.log(res.cookies, token)
         return token
        } catch (error) {
         console.log("Error generating Token: ", error.message)
