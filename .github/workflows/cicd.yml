@@ -23,8 +23,7 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Build and Push Docker Image
-        run: |
-          docker build --platform linux/arm64 -t mohnb33/curve-server:latest ./server
+        run: docker build --platform linux/arm64 -t mohnb33/curve-server:latest ./server
 
       - name: Push Docker Image to Dockerhub
         run: docker push mohnb33/curve-server:latest
@@ -41,12 +40,5 @@ jobs:
      - name: Remove Existing Container
        run: docker rm -f curve-server-container || true
 
-     - name: Run the Container
-       run: |
-         docker run -d -p 8080:8080 --name curve-server-container \
-           -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-           -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-           -e ENV='production' \
-           -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} \
-           -e PORT=8080 \
-           mohnb33/curve-server:latest
+     - name: Run the Container 
+       run: docker run -d -p 8080:8080 --name curve-server-container -e JWT_SECRET=${{ secrets.JWT_SECRET }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} -e ENV='production' -e GOOGLE_APP_PASSWORD=${{ secrets.GOOGLE_APP_PASSWORD }} mohnb33/curve-server:latest
