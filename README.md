@@ -8,3 +8,5 @@ Curve, a web platform designed to help users solve Data Structures and Algorithm
 - Personalized Admin Dashboard: Developed an admin page for monitoring user activity, managing problems, and tracking progress.
 - Database & Performance Optimization: Structured databases to efficiently store user data, problems, and performance metrics, ensuring fast query handling and scalability.
 - Technologies Used: Node.js, Express.js, MongoDB, JWT, RESTful APIs, OTP authentication, Algorithmic backend logic, Automated test execution.
+
+**contributions**
