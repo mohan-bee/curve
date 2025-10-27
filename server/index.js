@@ -10,8 +10,13 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-// const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "https://curve-nine.vercel.app"
-const baseUrl = "http://localhost:5173"
+const baseUrl = process.env.ENV == "development" ? "http://localhost:5173" : "http://16.170.168.114:5173"
+
+
+app.get('/env', (req, res) => {
+    res.json({ENV: process.env.ENV})
+})
+
 console.log(baseUrl)
 app.use(cors({
     origin: baseUrl,
@@ -36,8 +41,8 @@ const testCode = `print(\"Hello\")`;
     }
 })()
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8080, '0.0.0.0', () => {
     connectDB()
-    console.log(`Server is Running at ${process.env.PORT}`)
+    console.log(`Server is Running at 0.0.0.0:${process.env.PORT}`)
 })
  

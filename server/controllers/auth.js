@@ -89,9 +89,9 @@ const logout = async (req,res) => {
     try {
         res.clearCookie("token", {
              maxAge: 7 * 24 * 60 * 60 * 1000,
-            httpOnly:  process.env.NODE_ENV != "developement",
-            sameSite: 'none',
-            secure: process.env.NODE_ENV != "developement",
+            httpOnly:  process.env.NODE_ENV !== "development",
+            sameSite: process.env.ENV === "development" ? "lax" : "none",
+            secure: process.env.NODE_ENV !== "development",
         })
         return res.status(200).json({msg: "User Logged out Successfully"})
     } catch (error) {
