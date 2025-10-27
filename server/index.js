@@ -41,7 +41,7 @@ const testCode = `print(\"Hello\")`;
     }
 })()
 
-app.listen(process.env.PORT, '0.0.0.0', () => {
+app.listen(process.env.PORT || 8080, '0.0.0.0', () => {
     connectDB()
     console.log(`Server is Running at 0.0.0.0:${process.env.PORT}`)
 })
