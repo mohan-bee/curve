@@ -7,4 +7,6 @@ Curve, a web platform designed to help users solve Data Structures and Algorithm
 - Interactive Testing: Built a system to execute all test cases on user code submissions with a single click, providing instant feedback.
 - Personalized Admin Dashboard: Developed an admin page for monitoring user activity, managing problems, and tracking progress.
 - Database & Performance Optimization: Structured databases to efficiently store user data, problems, and performance metrics, ensuring fast query handling and scalability.
-- Technologies Used: Node.js, Express.js, MongoDB, JWT, RESTful APIs, OTP authentication, Algorithmic backend logic, Automated test execution.
+- CI/CD : Wrote some yaml files to build the Dockerfile and contanirize it host it on Amazon EC2 instace(e.g linux arm64) 
+- Technologies Used: Node.js, Express.js, MongoDB, JWT, RESTful APIs, OTP authentication, Algorithmic backend logic, Automated test execution, Github Actions, Docker, AWS (EC2).
+
