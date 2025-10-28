@@ -1,6 +1,6 @@
 # Curve
 
-[LIVE](http://16.170.168.114:5173)
+[LIVE](http://16.16.76.79:5173)
 
 Curve, a web platform designed to help users solve Data Structures and Algorithms (DSA) problems topic-wise in an interactive and personalized manner.
 ## Key Contributions:
