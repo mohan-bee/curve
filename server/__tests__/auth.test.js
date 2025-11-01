@@ -7,5 +7,11 @@ it('should return not found', async () => {
     expect(response.statusCode).toBe(404);
     expect(response.body).toEqual({ msg: 'Token not Found !' });
   });
-});
+
+  afterAll(async () => {
+    if (mongoose.connection.readyState !== 0) {
+      await mongoose.connection.close();
+    }
+  });
+})
 
