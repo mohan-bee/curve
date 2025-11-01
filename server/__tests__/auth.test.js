@@ -1,6 +1,8 @@
 const request = require('supertest');
 const app = require('../index'); 
 const mongoose = require('mongoose');
+require('dotenv').config(); 
+
 describe('User Profile', () => {
 it('should return not found', async () => {
     const response = await request(app).get('/api/auth/profile');
