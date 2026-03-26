@@ -36,7 +36,7 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
   return (
     <div className="h-full w-ful font-sans bg-zinc-900 border border-zinc-700 shadow-sm text-sm rounded-md flex overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-36 border-r border-zinc-700 bg-zinc-800 text-zinc-300">
+      <div className="w-36 border-r border-zinc-700 bg-zinc-800 text-zinc-300 overflow-y-auto">
         <div className='w-full font-bold flex items-center justify-between px-5.5 bg-zinc-800 border border-zinc-700 py-2'>
           {passed.filter(p => p == true)?.length} Out of {testcases?.length}
           {!loading ? <div
