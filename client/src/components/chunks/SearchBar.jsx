@@ -1,36 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Search } from 'lucide-react'
 
-const SearchBar = ({ topics, setFilteredTopics }) => {
-  const [query, setQuery] = useState('')
-
+const SearchBar = ({ query, onQueryChange, resultCount, totalCount }) => {
   const handleChange = (e) => {
-    const value = e.target.value
-    setQuery(value)
-
-    if (value.trim() === '') {
-      setFilteredTopics(topics)
-      return
-    }
-
-    const searchedTopics = topics.filter(topic =>
-      topic.title.toLowerCase().includes(value.trim().toLowerCase())
-    )
-    setFilteredTopics(searchedTopics)
+    onQueryChange(e.target.value)
   }
 
   return (
-    <div className="my-25 flex items-center justify-center">
-      <div className="border border-zinc-500 ml-2 rounded-4xl w-100 h-13 flex items-center px-3">
-        <Search />
+    <div className="mx-auto my-20 flex w-full max-w-3xl flex-col items-center gap-3 px-6">
+      <label
+        className="flex h-13 w-full items-center rounded-4xl border border-zinc-600 bg-zinc-900 px-4 text-zinc-300 shadow-sm transition focus-within:border-emerald-400"
+        htmlFor="topic-search"
+      >
+        <Search aria-hidden="true" size={20} />
         <input
           onChange={handleChange}
+          id="topic-search"
           type="text"
           value={query}
-          className="w-full h-full px-3 outline-none"
+          className="h-full w-full bg-transparent px-3 text-white outline-none placeholder:text-zinc-500"
           placeholder="Search for topics..."
         />
-      </div>
+      </label>
+      <p className="text-sm text-zinc-400">
+        Showing {resultCount} of {totalCount} topics
+      </p>
     </div>
   )
 }
