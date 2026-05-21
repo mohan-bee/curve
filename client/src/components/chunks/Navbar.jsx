@@ -1,4 +1,4 @@
-import { DoorClosed, DoorOpen, LogOut, User } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuthStore } from '../../store/useAuthStore';
 import { useNavigate } from 'react-router-dom';
@@ -21,35 +21,43 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className='flex py-5 items-center justify-around bg-zinc-800 border-b border-b-zinc-700'>
+    <header className='sticky top-0 z-20 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur'>
+      <div className='mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10'>
       <div className='flex items-center gap-2'>
-        <img src="/Logo.png" alt="Logo" className="w-13 mb-2" />
-        <h1 className='text-4xl font-black'>CURVE</h1>
+        <img src="/Logo.png" alt="Curve" className="h-11 w-11 object-contain" />
+        <div>
+          <h1 className='text-xl font-black tracking-wide text-white'>CURVE</h1>
+          <p className='text-xs font-medium text-zinc-500'>Practice workspace</p>
+        </div>
       </div>
 
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setOpen(!open)}
-          className="inline-flex items-center justify-center p-2 rounded-full bg-stone-800 text-white hover:bg-stone-700"
+          aria-label="Open account menu"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-white transition hover:border-emerald-400"
         >
-          <User />
+          <User size={18} />
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-30 bg-white border border-stone-200 rounded-lg shadow-lg z-10">
-            <div 
-            className="px-4  flex justify-between items-center py-2 text-sm text-red-600 hover:bg-stone-100 cursor-pointer"
-            onClick={async () => {
-              navigate("/login")
-              await logout()
-            }}
+          <div className="absolute right-0 mt-2 w-36 overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow-xl">
+            <button
+              type="button"
+              aria-label="Log out"
+              className="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left text-sm font-semibold text-red-300 transition hover:bg-zinc-800"
+              onClick={async () => {
+                navigate("/login")
+                await logout()
+              }}
             >
               Log out <LogOut size={15}/>
-            </div>
+            </button>
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </header>
   );
 };
 

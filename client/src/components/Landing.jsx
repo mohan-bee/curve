@@ -1,73 +1,76 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { TrafficCone } from 'lucide-react'
+import { ArrowRight, Code2, Gauge, Layers3 } from 'lucide-react'
 
 const Landing = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="relative h-screen w-screen bg-gradient-to-b from-cyan-400 to-cyan-900 overflow-hidden flex items-center justify-center flex-col gap-6">
-      
-      {/* Floating Space Elements */}
-      <motion.img
-        src="https://static.vecteezy.com/system/resources/thumbnails/020/004/136/small_2x/moon-illustration-planet-png.png"
-        alt="Moon"
-        className="absolute top-10 left-10 w-24 md:w-32 opacity-70"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
+    <main className="min-h-screen bg-zinc-950 text-white">
+      <section className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-5 py-10 sm:px-8 lg:px-10">
+        <nav className="mb-12 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/Logo.png" alt="Curve" className="h-12 w-12 object-contain" />
+            <span className="text-xl font-black tracking-wide">CURVE</span>
+          </div>
+          <button
+            onClick={() => navigate('/login')}
+            className="rounded-lg border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-emerald-400 hover:text-white"
+          >
+            Sign in
+          </button>
+        </nav>
 
-      <motion.img
-        src="https://static.vecteezy.com/system/resources/previews/011/178/727/large_2x/saturn-on-space-background-elements-of-this-image-furnished-by-nasa-free-png.png"
-        alt="Saturn"
-        className="absolute bottom-10 right-10 w-28 md:w-36 opacity-50"
-        animate={{ x: [0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-      />
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="max-w-3xl">
+            <p className="mb-4 inline-flex rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-200">
+              Topic-wise DSA practice
+            </p>
 
-      <motion.div
-        className="absolute top-1/3 right-1/4 w-2 h-2 bg-white rounded-full"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ repeat: Infinity, duration: 4 }}
-      />
-      <motion.div
-        className="absolute top-2/3 left-1/3 w-1.5 h-1.5 bg-white rounded-full"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 3 }}
-      />
+            <h1 className="max-w-4xl text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">
+              Practice the problems that actually build recall.
+            </h1>
 
-      {/* Text and Button */}
-      <motion.h1
-        initial={{ opacity: 0, y: -60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 2 }}
-        className="text-7xl md:text-8xl font-black text-white drop-shadow-xl"
-      >
-        INTRODUCING CURVE
-      </motion.h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
+              Curve organizes important data-structure and algorithm problems by topic, so every session has a clear target.
+            </p>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1.5 }}
-        className="text-lg flex items-center gap-2 text-slate-200 font-light"
-      >
-        Under Construction <TrafficCone />
-      </motion.p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={() => navigate('/login')}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-400 px-5 py-3 text-sm font-black text-zinc-950 transition hover:bg-emerald-300"
+              >
+                Start practicing <ArrowRight size={18} />
+              </button>
+              <button
+                onClick={() => navigate('/home')}
+                className="rounded-lg border border-zinc-700 px-5 py-3 text-sm font-bold text-zinc-200 transition hover:border-cyan-400 hover:text-white"
+              >
+                Explore topics
+              </button>
+            </div>
+          </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, y: 20, scale: 1 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        onClick={() => navigate('/login')}
-        className="px-6 py-3 cursor-pointer bg-gradient-to-l from-slate-600 to-slate-900 text-white rounded-xl text-xl shadow-md"
-      >
-        Dive in →
-      </motion.button>
-    </div>
+          <div className="grid gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-4 shadow-2xl">
+            {[
+              ['Arrays and hashing', '18 core problems', Code2],
+              ['Two pointers', 'Pattern drills', Layers3],
+              ['Dynamic programming', 'Timed practice', Gauge],
+            ].map(([title, detail, Icon]) => (
+              <div key={title} className="flex items-center gap-4 rounded-md border border-zinc-800 bg-zinc-950 p-4">
+                <span className="flex h-10 w-10 items-center justify-center rounded-md bg-cyan-400/10 text-cyan-200">
+                  {React.createElement(Icon, { size: 20 })}
+                </span>
+                <div>
+                  <h2 className="text-base font-bold">{title}</h2>
+                  <p className="text-sm text-zinc-400">{detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   )
 }
 

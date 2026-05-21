@@ -1,22 +1,31 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import { Link, useNavigate } from 'react-router-dom'
-import { SkipBack } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowLeft, ShieldCheck } from 'lucide-react'
 
 const OTP = () => {
   const [otp, setOtp] = useState('')
   const { verify } = useAuthStore()
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black px-4">
-      <div className="bg-zinc-900 border border-zinc-700 shadow-md rounded-xl p-6 w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-center mb-4">Enter OTP</h2>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-950 px-4 text-white">
+      <div className="w-full max-w-md rounded-lg border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
+        <div className="mb-5 flex items-start gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-200">
+            <ShieldCheck size={22} />
+          </span>
+          <div>
+            <h2 className="text-2xl font-black">Enter OTP</h2>
+            <p className="mt-1 text-sm text-zinc-400">Verify the code sent to your email.</p>
+          </div>
+        </div>
         <input
-          type="number"
-          maxLength={4}
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           value={otp}
-          onChange={(e) => setOtp(e.target.value)}
-          className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-zinc-600 mb-4 text-center text-lg"
+          onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 4))}
+          className="mb-4 h-12 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 text-center text-lg tracking-[0.35em] text-white outline-none transition placeholder:tracking-normal placeholder:text-zinc-600 focus:border-cyan-400"
           placeholder="1234"
         />
         <button
@@ -25,11 +34,11 @@ const OTP = () => {
             window.location.reload()
           }
           }
-          className="w-full mb-5 bg-black text-white py-2 rounded-lg hover:bg-zinc-800 border border-zinc-700 transition duration-200"
+          className="mb-5 w-full rounded-lg bg-emerald-400 py-3 text-sm font-black text-zinc-950 transition hover:bg-emerald-300"
         >
           Verify
         </button>
-        <Link className='mt-10 text-zinc-400 hover:underline flex items-center gap-2' to={"/login"}>resend <SkipBack size={15}/> </Link>
+        <Link className='flex items-center gap-2 text-sm font-semibold text-zinc-400 transition hover:text-white' to={"/login"}><ArrowLeft size={15}/> Resend code</Link>
       </div>
     </div>
   )

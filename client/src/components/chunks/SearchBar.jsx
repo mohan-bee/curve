@@ -9,25 +9,25 @@ const SearchBar = ({ topics, setFilteredTopics }) => {
     setQuery(value)
 
     if (value.trim() === '') {
-      setFilteredTopics(topics)
+      setFilteredTopics(null)
       return
     }
 
-    const searchedTopics = topics.filter(topic =>
+    const searchedTopics = (topics || []).filter(topic =>
       topic.title.toLowerCase().includes(value.trim().toLowerCase())
     )
     setFilteredTopics(searchedTopics)
   }
 
   return (
-    <div className="my-25 flex items-center justify-center">
-      <div className="border border-zinc-500 ml-2 rounded-4xl w-100 h-13 flex items-center px-3">
-        <Search />
+    <div className="w-full max-w-xl">
+      <div className="flex h-12 items-center rounded-lg border border-zinc-800 bg-zinc-900 px-3 text-zinc-400 shadow-lg transition focus-within:border-cyan-400">
+        <Search size={18} />
         <input
           onChange={handleChange}
           type="text"
           value={query}
-          className="w-full h-full px-3 outline-none"
+          className="h-full w-full bg-transparent px-3 text-sm text-white outline-none placeholder:text-zinc-500"
           placeholder="Search for topics..."
         />
       </div>

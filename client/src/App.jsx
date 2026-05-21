@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 import Landing from './components/Landing'
@@ -11,46 +11,34 @@ import Topics from './components/admin/topics/Topics'
 import ProblemForm from './components/admin/problems/ProblemForm'
 import Problems from './components/admin/problems/Problems'
 import Curve from './components/curve/Curve'
-import Mobile from './components/Mobile'
 
 import { useAuthStore } from './store/useAuthStore'
 
 const App = () => {
   const { getProfile, user, loading } = useAuthStore()
   const location = useLocation()
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1073)
 
-  // Fetch user profile
   useEffect(() => {
     getProfile()
   }, [getProfile])
 
-  // Detect screen size changes
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1073)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  // Show mobile version immediately on mobile screen
-  if (isMobile) {
-    return <Mobile />
-  }
-
-  // Show loading screen while user data is being fetched
   const publicPaths = ['/', '/login', '/verify']
   const isPublicRoute = publicPaths.includes(location.pathname)
 
-  if (loading || (user == null && !isPublicRoute)) {
-    return <div>Loading...</div>
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+        <div className="flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 px-5 py-4 text-sm text-zinc-300 shadow-xl">
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          Loading Curve
+        </div>
+      </div>
+    )
   }
-  // if(loading || user == null){
-  //   return null
-  // }
 
+  if (user == null && !isPublicRoute) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <Routes>
