@@ -2,43 +2,48 @@ import React from 'react'
 import { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
+import { ArrowRight, Mail } from 'lucide-react'
 
 const Login = () => {
-    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const navigate = useNavigate()
 
     const {login} = useAuthStore()
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-950">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-5 text-white">
       <form 
-       onSubmit={async  () => {
-            await login(username, email)
+       onSubmit={async (event) => {
+            event.preventDefault()
+            await login('', email)
             navigate('/verify')
             }} 
-      className="bg-zinc-800 border border-zinc-700 p-8 rounded-2xl shadow-md w-full max-w-sm space-y-4">
-        {/* <input
-          type="text"
-          placeholder="Enter a username"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        /> */}
-        <input
-          type="email"
-          required
-          placeholder="Enter your email"
-          className="w-full px-4 py-2 border border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-zinc-600"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      className="w-full max-w-md space-y-5 rounded-lg border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-300">Sign in</p>
+          <h1 className="mt-2 text-3xl font-black">Continue to Curve</h1>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">Use your email to receive a one-time code.</p>
+        </div>
+        <label className="block">
+          <span className="mb-2 block text-sm font-semibold text-zinc-300">Email</span>
+          <span className="flex h-12 items-center rounded-lg border border-zinc-700 bg-zinc-950 px-3 text-zinc-500 transition focus-within:border-cyan-400">
+            <Mail size={18} />
+            <input
+              type="email"
+              required
+              placeholder="you@example.com"
+              className="h-full w-full bg-transparent px-3 text-sm text-white outline-none placeholder:text-zinc-600"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </span>
+        </label>
         <button 
         type='submit'
        
-            className="w-full bg-black text-white py-2 rounded-lg text-sm hover:bg-zinc-900 cursor-pointer transition-colors">
+            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-emerald-400 py-3 text-sm font-black text-zinc-950 transition hover:bg-emerald-300">
 
-          Send OTP
+          Send OTP <ArrowRight size={17} />
           
         </button>
       </form>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import SearchBar from './chunks/SearchBar'
 import Topics from './chunks/Topics'
 import Footer from './chunks/Footer'
-import DescriptionBar from './chunks/DescriptionBar'
 import Info from './chunks/Info'
 import Navbar from './chunks/Navbar'
 
@@ -22,7 +20,7 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-zinc-950 text-white">
       <Navbar />
       <Topics />
       <Footer />
