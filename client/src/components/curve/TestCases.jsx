@@ -1,71 +1,76 @@
-import { Circle, CircleDashed } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { CircleDashed } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 
 const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0)
 
   const isValidJSON = (str) => {
     try {
-      JSON.parse(str);
-      return true;
-    } catch (e) {
-      return false;
+      JSON.parse(str)
+      return true
+    } catch {
+      return false
     }
-  };
-
+  }
 
   useEffect(() => {
-    if (!testcases || !testOutput) return;
+    if (!testcases || !testOutput) return
 
     const newPassed = testcases.map((tc, index) => {
-      if (
-        isValidJSON(tc?.expected) &&
-        isValidJSON(testOutput[index]?.data)
-      ) {
+      if (isValidJSON(tc?.expected) && isValidJSON(testOutput[index]?.data)) {
         return (
           JSON.stringify(JSON.parse(tc.expected)) ===
           JSON.stringify(JSON.parse(testOutput[index]?.data))
-        );
+        )
       }
-      return false;
-    });
+      return false
+    })
 
-    setPassed(newPassed);
-  }, [testcases, testOutput]);
+    setPassed(newPassed)
+  }, [setPassed, testcases, testOutput])
+
+  const passedCount = passed.filter((p) => p === true)?.length || 0
+  const totalCount = testcases?.length || 0
 
   return (
-    <div className="h-full w-ful font-sans bg-zinc-900 border border-zinc-700 shadow-sm text-sm rounded-md flex overflow-hidden">
+    <div className="h-full w-full font-sans bg-zinc-900 border border-zinc-800 shadow-sm text-sm rounded-xl flex overflow-hidden">
       {/* Left Sidebar */}
-      <div className="w-36 border-r border-zinc-700 bg-zinc-800 text-zinc-300">
-        <div className='w-full font-bold flex items-center justify-between px-5.5 bg-zinc-800 border border-zinc-700 py-2'>
-          {passed.filter(p => p == true)?.length} Out of {testcases?.length}
-          {!loading ? <div
-          className={`${passed.filter(p => p == true)?.length == testcases?.length ? 'bg-green-400': 'bg-red-400'} w-3 h-3 rounded-full`}
-          >
-
-          </div> : (
-            <CircleDashed size={15} className='animate-spin'/>
+      <div className="w-40 border-r border-zinc-800 bg-zinc-900/80 text-zinc-300 overflow-y-auto">
+        <div className="w-full font-semibold flex items-center justify-between px-4 bg-zinc-900 border-b border-zinc-800 py-2.5 text-xs">
+          <span>
+            {passedCount} / {totalCount} Passed
+          </span>
+          {!loading ? (
+            <div
+              className={`${
+                totalCount > 0 && passedCount === totalCount
+                  ? 'bg-emerald-400'
+                  : 'bg-red-400'
+              } w-2.5 h-2.5 rounded-full`}
+            />
+          ) : (
+            <CircleDashed size={14} className="animate-spin text-emerald-400" />
           )}
         </div>
         {testcases?.map((tc, index) => (
           <button
-            key={tc._id}
+            key={tc._id || index}
             onClick={() => setSelected(index)}
-            className={`w-full flex items-center justify-around text-left px-4 py-2 border-b border-zinc-700 hover:bg-zinc-700  ${
+            className={`w-full flex items-center justify-between text-left px-4 py-2.5 border-b border-zinc-800/80 hover:bg-zinc-800/70 transition cursor-pointer text-xs ${
               selected === index
-                ? 'bg-zinc-700 text-zinc-300'
-                : 'bg-zinc-800 font-semibold text-zinc-300'
+                ? 'bg-zinc-800 text-zinc-100 font-semibold'
+                : 'bg-zinc-900 text-zinc-400'
             }`}
           >
-            <div>Test Case {index + 1}</div>
-            {!loading ? <div
-              className={`w-3 h-3 ${
-                passed[index] ? 'bg-green-400' : 'bg-red-400'
-              } rounded-full`}
-            ></div> : (
-              <div>
-                <CircleDashed size={15} className='animate-spin'/>
-              </div>
+            <span>Test Case {index + 1}</span>
+            {!loading ? (
+              <div
+                className={`w-2.5 h-2.5 ${
+                  passed[index] ? 'bg-emerald-400' : 'bg-red-400'
+                } rounded-full`}
+              />
+            ) : (
+              <CircleDashed size={14} className="animate-spin text-zinc-400" />
             )}
           </button>
         ))}
@@ -73,23 +78,29 @@ const TestCases = ({ testcases, testOutput, setPassed, passed, loading }) => {
 
       {/* Right Display Panel */}
       <div className="flex-1 p-4 overflow-auto">
-        <div className="flex flex-col gap-5 rounded-md p-4 space-y-2">
-          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
-            <span className="font-semibold">Input:</span>{' '}
-            {testcases?.[selected]?.input || ''}
+        <div className="flex flex-col gap-3">
+          <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-zinc-300 text-xs font-mono">
+            <span className="font-sans font-semibold text-zinc-400 mr-2">
+              Input:
+            </span>
+            {testcases?.[selected]?.input || '—'}
           </div>
-          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
-            <span className="font-semibold">Expected:</span>{' '}
-            {testcases?.[selected]?.expected || ''}
+          <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-zinc-300 text-xs font-mono">
+            <span className="font-sans font-semibold text-zinc-400 mr-2">
+              Expected:
+            </span>
+            {testcases?.[selected]?.expected || '—'}
           </div>
-          <div className="bg-zinc-800 p-3 rounded-md border border-zinc-700 text-zinc-300">
-            <span className="font-semibold">Output:</span>{' '}
-            {testOutput?.[selected]?.data || ''}
+          <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-zinc-300 text-xs font-mono">
+            <span className="font-sans font-semibold text-zinc-400 mr-2">
+              Output:
+            </span>
+            {testOutput?.[selected]?.data || '—'}
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TestCases;
+export default TestCases

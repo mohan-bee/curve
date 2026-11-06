@@ -1,72 +1,122 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { TrafficCone } from 'lucide-react'
+import { motion as Motion } from 'framer-motion'
+import { ArrowRight, Code2, Sparkles, Timer, Trophy } from 'lucide-react'
+
+const FEATURES = [
+  {
+    icon: Code2,
+    title: 'Topic-Focused Mastery',
+    description:
+      'Practice curated high-signal DSA problems organized by topic instead of endless random lists.',
+  },
+  {
+    icon: Timer,
+    title: 'Timed Sprints',
+    description:
+      'Solve consecutive challenges under a live timer to build interview speed and recall.',
+  },
+  {
+    icon: Trophy,
+    title: 'Instant Verification',
+    description:
+      'Run Python solutions directly in the browser workspace and validate every test case in real time.',
+  },
+]
 
 const Landing = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="relative h-screen w-screen bg-gradient-to-b from-cyan-400 to-cyan-900 overflow-hidden flex items-center justify-center flex-col gap-6">
-      
-      {/* Floating Space Elements */}
-      <motion.img
-        src="https://static.vecteezy.com/system/resources/thumbnails/020/004/136/small_2x/moon-illustration-planet-png.png"
-        alt="Moon"
-        className="absolute top-10 left-10 w-24 md:w-32 opacity-70"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
+    <div className="relative min-h-screen w-full bg-zinc-950 text-zinc-100 overflow-hidden flex flex-col justify-between">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_55%)]" />
 
-      <motion.img
-        src="https://static.vecteezy.com/system/resources/previews/011/178/727/large_2x/saturn-on-space-background-elements-of-this-image-furnished-by-nasa-free-png.png"
-        alt="Saturn"
-        className="absolute bottom-10 right-10 w-28 md:w-36 opacity-50"
-        animate={{ x: [0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-      />
+      <header className="relative z-10 max-w-6xl w-full mx-auto px-6 py-6 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img src="/Logo.png" alt="Curve Logo" className="w-9 h-9 object-contain" />
+          <span className="text-xl font-black tracking-tight">CURVE</span>
+        </div>
+        <button
+          onClick={() => navigate('/login')}
+          className="px-4 py-2 rounded-lg text-sm font-medium bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/80 transition cursor-pointer"
+        >
+          Sign in
+        </button>
+      </header>
 
-      <motion.div
-        className="absolute top-1/3 right-1/4 w-2 h-2 bg-white rounded-full"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ repeat: Infinity, duration: 4 }}
-      />
-      <motion.div
-        className="absolute top-2/3 left-1/3 w-1.5 h-1.5 bg-white rounded-full"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 3 }}
-      />
+      <main className="relative z-10 max-w-5xl w-full mx-auto px-6 py-12 flex flex-col items-center text-center gap-8">
+        <Motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          Topic-wise DSA Playground
+        </Motion.div>
 
-      {/* Text and Button */}
-      <motion.h1
-        initial={{ opacity: 0, y: -60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 2 }}
-        className="text-7xl md:text-8xl font-black text-white drop-shadow-xl"
-      >
-        INTRODUCING CURVE
-      </motion.h1>
+        <Motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight max-w-3xl leading-[1.08]"
+        >
+          Master algorithms one{' '}
+          <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+            focused curve
+          </span>{' '}
+          at a time.
+        </Motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1.5 }}
-        className="text-lg flex items-center gap-2 text-slate-200 font-light"
-      >
-        Under Construction <TrafficCone />
-      </motion.p>
+        <Motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed"
+        >
+          Skip the noise. Pick a core data structure or algorithm topic, solve
+          hand-picked problems in an integrated Python workspace, and track your
+          speed.
+        </Motion.p>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, y: 20, scale: 1 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        onClick={() => navigate('/login')}
-        className="px-6 py-3 cursor-pointer bg-gradient-to-l from-slate-600 to-slate-900 text-white rounded-xl text-xl shadow-md"
-      >
-        Dive in →
-      </motion.button>
+        <Motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="flex flex-wrap items-center justify-center gap-4 pt-2"
+        >
+          <button
+            onClick={() => navigate('/login')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-base shadow-lg shadow-emerald-500/20 transition cursor-pointer"
+          >
+            Start Practicing
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </Motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full pt-8 text-left">
+          {FEATURES.map((feature) => (
+            <div
+              key={feature.title}
+              className="p-5 rounded-2xl bg-zinc-900/70 border border-zinc-800/80 hover:border-zinc-700 transition"
+            >
+              <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3">
+                {React.createElement(feature.icon, { className: 'w-4 h-4' })}
+              </div>
+              <h2 className="text-base font-semibold text-zinc-100 mb-1">
+                {feature.title}
+              </h2>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <footer className="relative z-10 py-6 text-center text-xs text-zinc-500 border-t border-zinc-900">
+        Built for focused DSA preparation
+      </footer>
     </div>
   )
 }
