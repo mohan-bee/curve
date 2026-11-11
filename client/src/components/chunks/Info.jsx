@@ -1,24 +1,44 @@
-import { Cross } from 'lucide-react'
 import React from 'react'
 
-const Info = ({setOpenPopup}) => {
+const Info = ({ setOpenPopup }) => {
   return (
-    <div className='w-screen h-screen flex items-center backdrop-blur-xs justify-center absolute top-0'>
-        <div className='bg-zinc-800 border border-zinc-700 text-white rounded-md p-7 flex flex-col justify-between w-100 h-130'>
-            <p>
-                Hey, thanks for visiting Curve, Sadly this is under construction but some features may work go play around with those. <br />
-                This is the playground where your can solve dsa problems specific to the topic and this will only have the important problems which will
-                make you master in that topic.
-                This application is open to contribution intrested one go ahead <a target='__blank' className='text-blue-500 underline' href="https://github.com/mohan-bee/curve">contribute here.</a> <br />
-                <strong>I Built this because i struggled for topic wise preparation.</strong>  <br />
-                if you are interest to work with me join the <a className='text-blue-500 underline' target='__blank' href="https://discord.gg/mYyc4NDj">discord</a> channel we can cook some thing better.
-            </p>
-            <button  
-            className='bg-zinc-950 border border-zinc-700 cursor-pointer text-white py-2 rounded-md'
-            onClick={() => {
-              setOpenPopup(false)
-              }}>Close</button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+      <div className="bg-zinc-900 border border-zinc-700 text-zinc-100 rounded-2xl p-6 sm:p-8 flex flex-col justify-between max-w-md w-full space-y-6 shadow-2xl">
+        <div className="space-y-3 text-sm leading-relaxed text-zinc-300">
+          <h3 className="text-lg font-bold text-white">Welcome to Curve</h3>
+          <p>
+            Curve is your focused playground for topic-wise Data Structures & Algorithms mastery.
+          </p>
+          <p>
+            This application is open to contributions —{' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="text-cyan-400 underline"
+              href="https://github.com/mohan-bee/curve"
+            >
+              contribute on GitHub
+            </a>{' '}
+            or join our{' '}
+            <a
+              className="text-cyan-400 underline"
+              target="_blank"
+              rel="noreferrer"
+              href="https://discord.gg/mYyc4NDj"
+            >
+              Discord community
+            </a>
+            .
+          </p>
         </div>
+        <button
+          type="button"
+          className="w-full bg-cyan-500 hover:bg-cyan-400 cursor-pointer text-zinc-950 font-semibold py-2.5 rounded-xl transition"
+          onClick={() => setOpenPopup(false)}
+        >
+          Got it, let&apos;s code
+        </button>
+      </div>
     </div>
   )
 }

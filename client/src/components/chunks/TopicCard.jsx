@@ -1,54 +1,62 @@
-import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useTopicStore } from '../../store/useTopicStore';
-import { useGlobalStore } from '../../store/useGlobalStore';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useTopicStore } from '../../store/useTopicStore'
+import { useGlobalStore } from '../../store/useGlobalStore'
+import { getTopicInitials } from '../../utils/uiHelpers'
 
-const TopicCard = ({isAdminPage,id,title, description, coverImg}) => {
+const TopicCard = ({ isAdminPage, id, title, description }) => {
   const navigate = useNavigate()
-  const {deleteTopic}= useTopicStore()
-  const {startTimer} = useGlobalStore()
+  const { deleteTopic } = useTopicStore()
+  const { startTimer } = useGlobalStore()
 
   return (
-    <div className="w-80 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 transition rounded-2xl shadow-md overflow-hidden flex flex-col">
-      {/* <img
-        src={coverImg}
-        alt="Topic"
-        className="w-full h-48 object-cover"
-      /> */}
-      <div className='flex items-center  justify-center bg-gradient-to-r  from-emerald-500 to-emerald-900 h-50 w-full'>
-          <h1 className="text-2xl md:text-3xl font-black text-center text-black  drop-shadow-xl ">{title.toUpperCase()}</h1>
+    <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 hover:border-cyan-500/40 transition rounded-2xl shadow-lg overflow-hidden flex flex-col">
+      <div className="flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500/90 to-cyan-900 h-44 w-full px-4">
+        <span className="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-black/30 text-emerald-200 mb-2">
+          {getTopicInitials(title)}
+        </span>
+        <h2 className="text-xl sm:text-2xl font-black text-center text-white drop-shadow">
+          {String(title || '').toUpperCase()}
+        </h2>
       </div>
-      <div className="flex-1 p-4">
-        <h2 className="text-lg font-semibold mb-2 ">{title}</h2>
-        <p className="text-sm text-zinc-400">{description}</p>
+      <div className="flex-1 p-5 space-y-2">
+        <h3 className="text-lg font-semibold text-white">{title}</h3>
+        <p className="text-sm text-zinc-400 leading-relaxed">{description}</p>
       </div>
-      <div className="p-4 pt-0">
-        {!isAdminPage && <button 
-        className="w-full bg-zinc-950 border border-zinc-700 cursor-pointer hover:bg-zinc-900 hover:scale-105 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
-        onClick={() => {
-          navigate(`/curve/${id}`);
-          startTimer()
-        }}
-        >
-          Start
-        </button>}
-       {isAdminPage &&  <div className='flex flex-col gap-2'>
-          <button 
-          className="w-full cursor-pointer bg-orange-400  text-white font-medium py-2 px-4 rounded-md transition duration-200"
-          onClick={() => navigate(`/admin/topics/edit/${id}`)}
+      <div className="p-5 pt-0">
+        {!isAdminPage && (
+          <button
+            type="button"
+            className="w-full bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-semibold py-2.5 px-4 rounded-xl cursor-pointer transition duration-200"
+            onClick={() => {
+              navigate(`/curve/${id}`)
+              startTimer()
+            }}
           >
-          Edit
-        </button>
-          <button 
-          className="w-full cursor-pointer bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-200"
-          onClick={() => deleteTopic(id)}
-          >
-          Delete
-        </button>
-        </div>}
+            Start Practice
+          </button>
+        )}
+        {isAdminPage && (
+          <div className="flex flex-col gap-2">
+            <button
+              type="button"
+              className="w-full cursor-pointer bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold py-2 px-4 rounded-lg transition duration-200"
+              onClick={() => navigate(`/admin/topics/edit/${id}`)}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              className="w-full cursor-pointer bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+              onClick={() => deleteTopic(id)}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TopicCard;
+export default TopicCard

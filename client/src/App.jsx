@@ -14,66 +14,65 @@ import Curve from './components/curve/Curve'
 import Mobile from './components/Mobile'
 
 import { useAuthStore } from './store/useAuthStore'
+import { shouldShowMobileWorkspaceNotice } from './utils/uiHelpers'
 
 const App = () => {
   const { getProfile, user, loading } = useAuthStore()
   const location = useLocation()
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1073)
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1280
+  )
 
-  // Fetch user profile
   useEffect(() => {
     getProfile()
   }, [getProfile])
 
-  // Detect screen size changes
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1073)
+      setViewportWidth(window.innerWidth)
     }
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Show mobile version immediately on mobile screen
-  if (isMobile) {
+  if (shouldShowMobileWorkspaceNotice(location.pathname, viewportWidth)) {
     return <Mobile />
   }
 
-  // Show loading screen while user data is being fetched
   const publicPaths = ['/', '/login', '/verify']
   const isPublicRoute = publicPaths.includes(location.pathname)
 
   if (loading || (user == null && !isPublicRoute)) {
-    return <div>Loading...</div>
+    return (
+      <div className="min-h-screen w-full bg-zinc-950 text-zinc-100 flex flex-col items-center justify-center gap-3">
+        <div className="h-10 w-10 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+        <p className="text-sm text-zinc-400 tracking-wide">Loading Curve workspace...</p>
+      </div>
+    )
   }
-  // if(loading || user == null){
-  //   return null
-  // }
-
 
   return (
-    <Routes>
-      {/* Admin Routes */}
-      <Route path="/admin" element={user?.isAdmin ? <Admin /> : <Navigate to="/home" />} />
-      <Route path="/admin/topics" element={user?.isAdmin ? <Topics /> : <Navigate to="/home" />} />
-      <Route path="/admin/topics/create" element={user?.isAdmin ? <TopicForm isEdit={false} /> : <Navigate to="/home" />} />
-      <Route path="/admin/topics/edit/:id" element={user?.isAdmin ? <TopicForm isEdit={true} /> : <Navigate to="/home" />} />
-      <Route path="/admin/problems" element={user?.isAdmin ? <Problems /> : <Navigate to="/home" />} />
-      <Route path="/admin/problems/create" element={user?.isAdmin ? <ProblemForm isEdit={false} /> : <Navigate to="/home" />} />
-      <Route path="/admin/problems/edit/:id" element={user?.isAdmin ? <ProblemForm isEdit={true} /> : <Navigate to="/home" />} />
-      {/* Public Routes */}
-      
-      <Route path="/" element={<Landing />} />
-      <Route path="/login" element={user?.verified ? <Navigate to="/home" /> : <Login />} />
-      <Route path="/verify" element={user?.verified ? <Navigate to="/home" /> : <OTP />} />
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-cyan-500/30">
+      <Routes>
+        {/* Admin Routes */}
+        <Route path="/admin" element={user?.isAdmin ? <Admin /> : <Navigate to="/home" />} />
+        <Route path="/admin/topics" element={user?.isAdmin ? <Topics /> : <Navigate to="/home" />} />
+        <Route path="/admin/topics/create" element={user?.isAdmin ? <TopicForm isEdit={false} /> : <Navigate to="/home" />} />
+        <Route path="/admin/topics/edit/:id" element={user?.isAdmin ? <TopicForm isEdit={true} /> : <Navigate to="/home" />} />
+        <Route path="/admin/problems" element={user?.isAdmin ? <Problems /> : <Navigate to="/home" />} />
+        <Route path="/admin/problems/create" element={user?.isAdmin ? <ProblemForm isEdit={false} /> : <Navigate to="/home" />} />
+        <Route path="/admin/problems/edit/:id" element={user?.isAdmin ? <ProblemForm isEdit={true} /> : <Navigate to="/home" />} />
 
-      {/* Protected Routes */}
-      <Route path="/home" element={user?.verified ? <Home /> : <Navigate to="/login" />} />
-      <Route path="/curve/:id" element={user?.verified ? <Curve user={user} /> : <Navigate to="/login" />} />
+        {/* Public Routes */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={user?.verified ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/verify" element={user?.verified ? <Navigate to="/home" /> : <OTP />} />
 
-      
-    </Routes>
+        {/* Protected Routes */}
+        <Route path="/home" element={user?.verified ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/curve/:id" element={user?.verified ? <Curve user={user} /> : <Navigate to="/login" />} />
+      </Routes>
+    </div>
   )
 }
 
